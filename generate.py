@@ -167,8 +167,8 @@ if __name__ == '__main__':
 			seed = fighter
 
 	for i in seed:
-		i.x += 10
-		i.y -= 10
+		i.x += 30
+		i.y -= 30
 
 	while len(seed) > 0:
 		for i in seed:
