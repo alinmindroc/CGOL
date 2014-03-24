@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+#generates coordinates for different CGOL structures
+
+import sys
+
 class Cell:
 	def __init__(self, x = 0, y = 0):
 		self.alive = True
@@ -131,13 +135,36 @@ def evolve_universe(seed):
 	return result
 
 if __name__ == '__main__':
+	#fighter
 	c1 = Cell(0, 0)
 	c2 = Cell(0, 2)
 	c3 = Cell(1, 0)
 	c4 = Cell(1, 1)
 	c5 = Cell(2, 1)
 
-	seed = set([c1, c2, c3, c4, c5])
+	fighter = set([c1, c2, c3, c4, c5])
+
+	#explosion
+	c1 = Cell(0, 0)
+	c2 = Cell(0, 1)
+	c3 = Cell(0, 5)
+	c4 = Cell(0, 6)
+	c5 = Cell(1, 2)
+	c6 = Cell(1, 3)
+	c7 = Cell(1, 4)
+	c8 = Cell(2, 1)
+	c9 = Cell(2, 5)
+	c10 = Cell(3, 2)
+	c11 = Cell(3, 4)
+	c12 = Cell(4, 3)
+
+	explosion = set([c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12])
+
+	seed = explosion
+
+	if len(sys.argv) > 1:
+		if sys.argv[1] == 'fighter':
+			seed = fighter
 
 	for i in seed:
 		i.x += 10
