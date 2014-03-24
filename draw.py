@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
+#draws each line of coordinates from file received as command-line arg
+
 import sys
 import pygame
 import time
 import random
+import fileinput
 
 w=(10, 10)
 
@@ -18,7 +21,7 @@ for line in data:
 	for i in line.split():
 			coordinates.append(map(int, i.split(':')))
 
-	print coordinates
+	#print coordinates
 	for i in coordinates:
 		pygame.draw.rect(window, ((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))), pygame.Rect((10*i[0], -10*i[1]), w))
 
