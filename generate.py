@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#generates coordinates for different CGOL structures
+#genereaza coordonate pentru diferite structuri CGOL
 
 import sys
 
@@ -25,6 +25,7 @@ class Cell:
 	def __eq__(self, c2):
 		return self.x == c2.x and self.y == c2.y
 
+	#vecinii unei celule in plan cartezian
 	def neighbours(self):
 		s = []
 		x = self.x
@@ -59,7 +60,7 @@ class Cell:
 		res = (str)(self.x) + ":" + (str)(self.y)
 		return res
 
-
+#returneaza numarul de vecini in viata ai celulei cell de pe tabla seed
 def alive_neighbours(cell, seed):
 	s = 0
 	for i in seed:
@@ -68,6 +69,7 @@ def alive_neighbours(cell, seed):
 	return s
 
 
+#verifica daca c1 si c2 sunt vecini
 def neighbours(c1, c2):
 	if c2.x == c1.x - 1 and c2.y == c1.y + 1:
 		return True
@@ -95,7 +97,7 @@ def evolve_universe(seed):
 	if len(seed) == 1:
 		return set()
 
-	#creez haloul
+	#creez haloul, frontiera de vecini pentru fiecare celula vie
 	for cell in seed:
 		cell.revive()
 		halo = halo.union(cell.neighbours())
@@ -104,7 +106,7 @@ def evolve_universe(seed):
 		if i in halo:
 			halo.remove(i)
 
-	#ma uit prin halou sa vad daca invie ceva
+	#ma uit prin halou sa vad daca invie vreo celula la pasul curent
 	for hcell in halo:
 		nr = 0
 		for scell in seed:
@@ -113,7 +115,7 @@ def evolve_universe(seed):
 		if nr == 3:
 			hcell.revive()
 
-	#ma uit prin seed sa vad daca moare ceva
+	#ma uit prin seed sa vad daca moare vreo celula la pasul curent
 	for scell in seed:
 		nr = 0
 		for ncell in seed:
@@ -144,7 +146,7 @@ if __name__ == '__main__':
 
 	fighter = set([c1, c2, c3, c4, c5])
 
-	#explosion
+	#explozie
 	c1 = Cell(0, 0)
 	c2 = Cell(0, 1)
 	c3 = Cell(0, 5)
