@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-#draws each line of coordinates from file received as command-line arg
-
 import sys
 import pygame
 import time
