@@ -21,7 +21,7 @@ for line in data:
 	for i in line.split():
 			coordinates.append(map(int, i.split(':')))
 
-	#print coordinates
+	#desenez un patratel pentru fiecare pereche de coordonate din fisierul de intrare
 	for i in coordinates:
 		pygame.draw.rect(window, ((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))), pygame.Rect((10*i[0], -10*i[1]), w))
 
