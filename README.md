@@ -1,10 +1,11 @@
 ConwayGOL
 =========
-
 Conway's game of life in python with pygame
 
-run with:
+Requires: pygame module
 
-make generate
+How to run:
 
-make draw
+> make generate #generates array of 2D points to be drawn
+
+> make draw #draws given array of 2D points on pygame window
