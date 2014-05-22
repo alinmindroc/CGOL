@@ -71,64 +71,64 @@ def alive_neighbours(cell, seed):
 
 #verifica daca c1 si c2 sunt vecini
 def neighbours(c1, c2):
-	if c2.x == c1.x - 1 and c2.y == c1.y + 1:
-		return True
-	elif c2.x == c1.x and c2.y == c1.y + 1:
-		return True
-	elif c2.x == c1.x + 1 and c2.y == c1.y + 1:
-		return True
-	elif c2.x == c1.x + 1 and c2.y == c1.y:
-		return True
-	elif c2.x == c1.x + 1 and c2.y == c1.y - 1:
-		return True
-	elif c2.x == c1.x and c2.y == c1.y - 1:
-		return True
-	elif c2.x == c1.x - 1 and c2.y == c1.y - 1:
-		return True
-	elif c2.x == c1.x - 1 and c2.y == c1.y:
-		return True
-	else:
-		return False
+    if c2.x == c1.x - 1 and c2.y == c1.y + 1:
+        return True
+    elif c2.x == c1.x and c2.y == c1.y + 1:
+        return True
+    elif c2.x == c1.x + 1 and c2.y == c1.y + 1:
+        return True
+    elif c2.x == c1.x + 1 and c2.y == c1.y:
+        return True
+    elif c2.x == c1.x + 1 and c2.y == c1.y - 1:
+        return True
+    elif c2.x == c1.x and c2.y == c1.y - 1:
+        return True
+    elif c2.x == c1.x - 1 and c2.y == c1.y - 1:
+        return True
+    elif c2.x == c1.x - 1 and c2.y == c1.y:
+        return True
+    else:
+        return False
 
 
 def evolve_universe(seed):
-	halo = set()
+    halo = set()
 
-	if len(seed) == 1:
-		return set()
+    if len(seed) == 1:
+        return set()
 
-	#creez haloul, frontiera de vecini pentru fiecare celula vie
-	for cell in seed:
-		cell.revive()
-		halo = halo.union(cell.neighbours())
+    #creez haloul, frontiera de vecini pentru fiecare celula vie
+    for cell in seed:
+        cell.revive()
+        halo = halo.union(cell.neighbours())
 
-	for i in seed:
-		if i in halo:
-			halo.remove(i)
+    for i in seed:
+        if i in halo:
+            halo.remove(i)
 
-	#ma uit prin halou sa vad daca invie vreo celula la pasul curent
-	for hcell in halo:
-		nr = 0
-		for scell in seed:
-			if neighbours(hcell, scell):
-				nr += 1
-		if nr == 3:
-			hcell.revive()
+    #ma uit prin halou sa vad daca invie vreo celula la pasul curent
+    for hcell in halo:
+        nr = 0
+            for scell in seed:
+                if neighbours(hcell, scell):
+                    nr += 1
+                if nr == 3:
+                    hcell.revive()
 
-	#ma uit prin seed sa vad daca moare vreo celula la pasul curent
-	for scell in seed:
-		nr = 0
-		for ncell in seed:
-			if neighbours(ncell, scell):
-				nr += 1
-		if nr < 2 or nr > 3:
-			scell.die()
+    #ma uit prin seed sa vad daca moare vreo celula la pasul curent
+    for scell in seed:
+        nr = 0
+    for ncell in seed:
+        if neighbours(ncell, scell):
+            nr += 1
+        if nr < 2 or nr > 3:
+            scell.die()
 
-	#construiesc rezultatul din celulele vii
-	result = set()
-	for i in halo:
-		if i.isalive():
-			result.add(i)
+    #construiesc rezultatul din celulele vii
+    result = set()
+    for i in halo:
+        if i.isalive():
+            result.add(i)
 
     for i in seed:
         if i.isalive():
