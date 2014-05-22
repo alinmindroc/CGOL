@@ -5,60 +5,60 @@
 import sys
 
 class Cell:
-	def __init__(self, x = 0, y = 0):
-		self.alive = True
-		self.x = x
-		self.y = y
+    def __init__(self, x = 0, y = 0):
+        self.alive = True
+        self.x = x
+        self.y = y
 
-	def __hash__(self):
-		return hash(self.x) ^ hash(self.y)
+    def __hash__(self):
+        return hash(self.x) ^ hash(self.y)
 
-	def die(self):
-		self.alive = False
+    def die(self):
+        self.alive = False
 
-	def revive(self):
-		self.alive = True
+    def revive(self):
+        self.alive = True
 
-	def isalive(self):
-		return self.alive
+    def isalive(self):
+        return self.alive
 
-	def __eq__(self, c2):
-		return self.x == c2.x and self.y == c2.y
+    def __eq__(self, c2):
+        return self.x == c2.x and self.y == c2.y
 
-	#vecinii unei celule in plan cartezian
-	def neighbours(self):
-		s = []
-		x = self.x
-		y = self.y
-		s.append(Cell(x-1, y+1))
-		s.append(Cell(x, y+1))
-		s.append(Cell(x+1, y+1))
-		s.append(Cell(x+1, y))
-		s.append(Cell(x+1, y-1))
-		s.append(Cell(x, y-1))
-		s.append(Cell(x-1, y-1))
-		s.append(Cell(x-1, y))
+    #vecinii unei celule in plan cartezian
+    def neighbours(self):
+        s = []
+        x = self.x
+        y = self.y
+        s.append(Cell(x-1, y+1))
+        s.append(Cell(x, y+1))
+        s.append(Cell(x+1, y+1))
+        s.append(Cell(x+1, y))
+        s.append(Cell(x+1, y-1))
+        s.append(Cell(x, y-1))
+        s.append(Cell(x-1, y-1))
+        s.append(Cell(x-1, y))
 
-		for i in s:
-			i.die()
+        for i in s:
+            i.die()
 
-		return s
+        return s
 
-	def setx(self, x):
-		self.x = x
+    def setx(self, x):
+        self.x = x
 
-	def sety(self, y):
-		self.y = y
+    def sety(self, y):
+        self.y = y
 
-	def getx(self):
-		return self.x
+    def getx(self):
+        return self.x
 
-	def gety(self):
-		return self.y
+    def gety(self):
+        return self.y
 
-	def __str__(self):
-		res = (str)(self.x) + ":" + (str)(self.y)
-		return res
+    def __str__(self):
+        res = (str)(self.x) + ":" + (str)(self.y)
+        return res
 
 #returneaza numarul de vecini in viata ai celulei cell de pe tabla seed
 def alive_neighbours(cell, seed):
