@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-#generates the coordinates for the different CGOL figures (fighter, explosion)
+#generates the coordinates for a CGOL instance. There are two default structures: fighter and explosion
+#These are infinite figures, at no point in the simulation all their cells are dead
 
 import sys
 
