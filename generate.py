@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
-#genereaza coordonate pentru diferite structuri CGOL
+#generates the coordinates for the different CGOL figures (fighter, explosion)
 
 import sys
 
+#the smallest component in the structure of a CGOL figure
 class Cell:
     def __init__(self, x = 0, y = 0):
         self.alive = True
@@ -25,7 +26,6 @@ class Cell:
     def __eq__(self, c2):
         return self.x == c2.x and self.y == c2.y
 
-    #vecinii unei celule in plan cartezian
     def neighbours(self):
         s = []
         x = self.x
@@ -60,7 +60,6 @@ class Cell:
         res = (str)(self.x) + ":" + (str)(self.y)
         return res
 
-#returneaza numarul de vecini in viata ai celulei cell de pe tabla seed
 def alive_neighbours(cell, seed):
     s = 0
     for i in seed:
@@ -68,8 +67,7 @@ def alive_neighbours(cell, seed):
     s += 1
 	return s
 
-
-#verifica daca c1 si c2 sunt vecini
+#check if c1 and c2 are neighbours
 def neighbours(c1, c2):
     if c2.x == c1.x - 1 and c2.y == c1.y + 1:
         return True
@@ -91,13 +89,16 @@ def neighbours(c1, c2):
         return False
 
 
+#the method which generates the next state of the universe based on the current state and the survival/death rules
+#seed = set of alive cells at current time
+#halo = set of cells around the seed which may be revived in the next step 
 def evolve_universe(seed):
     halo = set()
 
     if len(seed) == 1:
         return set()
 
-    #creez haloul, frontiera de vecini pentru fiecare celula vie
+    #create a halo consisting of alive neighbours for each cell
     for cell in seed:
         cell.revive()
         halo = halo.union(cell.neighbours())
@@ -106,7 +107,7 @@ def evolve_universe(seed):
         if i in halo:
             halo.remove(i)
 
-    #ma uit prin halou sa vad daca invie vreo celula la pasul curent
+    #check if any cell in the halo revives at the next step
     for hcell in halo:
         nr = 0
             for scell in seed:
@@ -115,7 +116,7 @@ def evolve_universe(seed):
                 if nr == 3:
                     hcell.revive()
 
-    #ma uit prin seed sa vad daca moare vreo celula la pasul curent
+    #check the seed to see if a cell dies at the next step
     for scell in seed:
         nr = 0
     for ncell in seed:
@@ -124,7 +125,7 @@ def evolve_universe(seed):
         if nr < 2 or nr > 3:
             scell.die()
 
-    #construiesc rezultatul din celulele vii
+    #generate a result based only on the alive cells
     result = set()
     for i in halo:
         if i.isalive():
@@ -137,6 +138,7 @@ def evolve_universe(seed):
     return result
 
 if __name__ == '__main__':
+    #two infinite structures
     #fighter
     c1 = Cell(0, 0)
     c2 = Cell(0, 2)
