@@ -139,7 +139,6 @@ def evolve_universe(seed):
 	return result
 
 if __name__ == '__main__':
-	#two infinite structures
 	#fighter
 	c1 = Cell(0, 0)
 	c2 = Cell(0, 2)
